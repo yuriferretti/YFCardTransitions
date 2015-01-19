@@ -91,8 +91,6 @@
 
     self.cardPickTransition.movingCardSnapshot = snapshotView;
     
-    self.selectedCardColor = cell.imageView.tintColor;
-    
     [self performSegueWithIdentifier:@"showDetail" sender:nil];
     
 }

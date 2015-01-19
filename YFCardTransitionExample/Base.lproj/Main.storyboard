@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7Ij-5z-Ga4">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <scenes>
+        <!--Card Collection View Controller-->
+        <scene sceneID="njg-EE-cQu">
+            <objects>
+                <collectionViewController id="7Ij-5z-Ga4" customClass="YFCardCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Gig-W0-Bhq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewLayout key="collectionViewLayout" id="HAW-Z1-eMj"/>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="7Ij-5z-Ga4" id="U9A-nA-IMW"/>
+                            <outlet property="delegate" destination="7Ij-5z-Ga4" id="BIO-8g-VTx"/>
+                        </connections>
+                    </collectionView>
+                    <connections>
+                        <segue destination="3Gk-so-fsq" kind="presentation" identifier="showDetail" id="zX0-jc-S5q"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Us-0y-grt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="727" y="-372"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="72r-zN-54w">
+            <objects>
+                <viewController id="3Gk-so-fsq" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eiy-Fy-6Lh"/>
+                        <viewControllerLayoutGuide type="bottom" id="gh9-Gs-qQd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="z4v-fh-f1r">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y8L-Pg-hy0">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gh9-Gs-qQd" firstAttribute="top" secondItem="y8L-Pg-hy0" secondAttribute="bottom" id="HAF-sk-r3M"/>
+                            <constraint firstItem="y8L-Pg-hy0" firstAttribute="leading" secondItem="z4v-fh-f1r" secondAttribute="leading" id="ORD-k4-OuK"/>
+                            <constraint firstAttribute="trailing" secondItem="y8L-Pg-hy0" secondAttribute="trailing" id="TP3-aX-lmT"/>
+                            <constraint firstItem="y8L-Pg-hy0" firstAttribute="top" secondItem="eiy-Fy-6Lh" secondAttribute="bottom" id="fdS-2B-QmY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainView" destination="y8L-Pg-hy0" id="Z4a-9l-qhf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CJ6-k2-yeh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1414" y="-372"/>
+        </scene>
+    </scenes>
+</document>

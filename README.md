@@ -6,7 +6,7 @@ YFCardTransitions is a set of custom UIViewController transitions designed to be
 With [CocoaPods](http://cocoapods.org/), add this line to your Podfile.
 
 ```
-pod 'YFCardTransitions', '~> 0.1'
+pod 'YFCardTransitions'
 ```
 
 Or drag the files inside the Source folder to your project

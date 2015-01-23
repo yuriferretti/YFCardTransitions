@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "YFCardTransitions"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "Stacked card layout transitions"
   s.homepage     = "https://github.com/yuriferretti/YFCardTransitions" 
   s.license      = { :type => "MIT", :file => "LICENSE" }

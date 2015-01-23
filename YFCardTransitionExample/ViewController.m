@@ -21,18 +21,27 @@
 //THE SOFTWARE.
 
 #import "ViewController.h"
+#import "YFDragDownToDismissTransition.h"
 
-@interface ViewController ()
+@interface ViewController () <UIViewControllerTransitioningDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *mainView;
+@property (strong, nonatomic) YFDragDownToDismissTransition *dragDownToDismissTransition;
 
 @end
 
 @implementation ViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.transitioningDelegate = self;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self createRoundedLayerMask];
+    [self.dragDownToDismissTransition wireToViewController:self];
+    self.mainView.backgroundColor = self.color;
 }
 
 - (void)createRoundedLayerMask {
@@ -40,14 +49,26 @@
     CGRect bounds = [[UIScreen mainScreen]bounds];
     CAShapeLayer *layerMask = [CAShapeLayer layer];
     layerMask.path = [UIBezierPath bezierPathWithRoundedRect:bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(10.0, 10.0)].CGPath;
-    
     self.mainView.layer.mask = layerMask;
     
 }
 
-- (void)setColor:(UIColor *)color {
-    
-    self.mainView.backgroundColor = color;
+
+- (YFDragDownToDismissTransition *)dragDownToDismissTransition {
+    if (!_dragDownToDismissTransition) {
+        _dragDownToDismissTransition = [YFDragDownToDismissTransition new];
+    }
+    return _dragDownToDismissTransition;
 }
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    return  self.dragDownToDismissTransition;
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
+    
+    return self.dragDownToDismissTransition;
+}
+
 
 @end

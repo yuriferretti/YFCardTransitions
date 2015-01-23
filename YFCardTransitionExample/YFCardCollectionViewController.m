@@ -9,13 +9,12 @@
 #import "YFCardCollectionViewController.h"
 #import "CardCollectionViewCell.h"
 #import "YFCardPickTranstion.h"
-#import "YFDragDownToDismissTransition.h"
+
 #import "ViewController.h"
 
 @interface YFCardCollectionViewController () <UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) YFCardPickTranstion           *cardPickTransition;
-@property (strong, nonatomic) YFDragDownToDismissTransition *dragDownToDismissTransition;
 @property (strong, nonatomic) UIColor *selectedCardColor;
 
 @end
@@ -29,6 +28,7 @@
     
     [super viewDidLoad];
     [self setupCollectionView];
+    self.transitioningDelegate = self;
 }
 
 #pragma mark - acessors
@@ -41,14 +41,6 @@
     }
     return _cardPickTransition;
 }
-
-- (YFDragDownToDismissTransition *)dragDownToDismissTransition {
-    if (!_dragDownToDismissTransition) {
-        _dragDownToDismissTransition = [YFDragDownToDismissTransition new];
-    }
-    return _dragDownToDismissTransition;
-}
-
 
 #pragma mark -  collection view setup
 
@@ -85,11 +77,13 @@
     CGRect referenceFrame = [collectionView convertRect:attributes.frame toView:collectionView.superview];
     
     self.cardPickTransition.referenceFrame = referenceFrame;
+    self.cardPickTransition.singleCardOnStack = [self.collectionView numberOfItemsInSection:0] == 1;
     
     CardCollectionViewCell *cell = (CardCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     UIView *snapshotView = [cell snapshotViewAfterScreenUpdates:YES];
 
     self.cardPickTransition.movingCardSnapshot = snapshotView;
+    self.selectedCardColor = cell.imageView.tintColor;
     
     [self performSegueWithIdentifier:@"showDetail" sender:nil];
     
@@ -102,17 +96,8 @@
 #pragma mark - UIViewControllerTransitioningDelegate Protocol
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    
-    return self.cardPickTransition;
-}
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return  self.dragDownToDismissTransition;
-}
-
-- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
-    
-    return self.dragDownToDismissTransition;
+    return  self.cardPickTransition;
 }
 
 #pragma mark - Navigation
@@ -120,10 +105,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     ViewController *vc = segue.destinationViewController;
-    [self.dragDownToDismissTransition wireToViewController:vc];
-    [vc setColor:self.selectedCardColor];
+    vc.color = self.selectedCardColor;
     vc.transitioningDelegate = self;
-    vc.modalPresentationStyle = UIModalPresentationCustom;
 }
 
 

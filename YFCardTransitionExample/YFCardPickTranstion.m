@@ -74,6 +74,7 @@
     
     //setting the to view frame
     toView.frame = CGRectOffset(self.movingCardSnapshot.frame, 0, statusBarViewHeight);
+
     //hiding the toView
     toView.alpha = 0.0;
     
@@ -91,9 +92,10 @@
 
     //is the last card
     //just slide it up
+    
     if (movingCardReveal <= self.cardTopReveal) {
         
-        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:self.duration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             
             self.movingCardSnapshot.frame = toViewFinalFrame;
             toView.frame = toViewFinalFrame;
@@ -103,7 +105,7 @@
             
         } completion:^(BOOL finished) {
             
-            [containerView addSubview:toVC.view];
+            //[containerView addSubview:toVC.view];
             [self.movingCardSnapshot removeFromSuperview];
             [overlappingCards removeFromSuperview];
             [transitionContext completeTransition:YES];

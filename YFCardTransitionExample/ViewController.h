@@ -24,6 +24,6 @@
 
 @interface ViewController : UIViewController
 
-- (void)setColor:(UIColor *)color;
+@property (strong, nonatomic) UIColor *color;
 
 @end

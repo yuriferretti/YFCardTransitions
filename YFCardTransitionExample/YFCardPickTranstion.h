@@ -37,4 +37,7 @@
 //snapshot of selected card
 @property (strong, nonatomic) UIView         *movingCardSnapshot;
 
+//informs if the card stack has a single card
+@property (assign, nonatomic) BOOL           singleCardOnStack;
+
 @end
